@@ -1,20 +1,4 @@
-// Title: Countingoney
-// Deadline: 18.12.2016
 
-// Description:
-// Our user needs to print invoices for some trinkets she will be selling. She is not good at reading numbers,
-//  so we must help her. She wants to enter a number that should be invoiced, and to recieve the text that should
-//   be put in the "with words" part of the invoice. You must help her print the invoices, that must be mailed on
-//    friday morning. 
-
-// Details:
-// Make a web-page (and a javascript program) with the following functionalities:
-// 1. It should have a method of entering a value (either by prompt or by text-box)
-// 2. It should verify whether the entered value is actually a whole number [*]
-// 3. It should verify that the range of the entered number is valid [*]
-// 4. It should display the textual value of the entered number
-// 5. The valid range for numbers is [1 - 999,999,999,999]
-// 6. You should have a separate function called "numberToWords" that takes a number as input and returns a string.
 
 // Some (valid) examples:
 // #			English
@@ -51,12 +35,41 @@
 // 128341679901 "Сто дваесет и осум милијарди триста четериесет и еден милион шестотини седумдесет и 
 // девет илјади девестотини и еден"
 
-// var max = 100;
-// $('input').keyup(function(){
+// console.log(inputNumber);
 
-// var inputValue = $(this).val();
-// if(inputValue > max){
-//     alert('greater!');
+//Verify if the number is whole---------------------------
+function isInt(num) {
+    if (num % 1 == 0) {
+        return true;
+    }
+    else {
+        alert("The entered number is not a whole number")
+        $("#input").val('');
+        return false;
+    }
+};
 
-//     $(this).val('')
-// }
+//Verify the range of the number---------------------
+function isValidRange(inputNumber) {
+    if (inputNumber > 1 && inputNumber < 999999999999) {
+        return true;
+    }
+    else {
+        alert("The entered number is not in the range of 1 - 999,999,999,999")
+        $("#input").val('');
+        return false;
+    }
+};
+
+//Number to words function-----------------------------
+function numberToWords(num) {  
+
+};
+
+$("#button").click(function () {
+    let inputNumber = $("#input").val();
+
+    isInt(inputNumber);
+    isValidRange(inputNumber);
+    console.log(inputNumber);
+});
