@@ -1,7 +1,30 @@
 body {
-    background-color: #999999;
+    background-color: black;
 }
 
 #header {
-    background-image: url('images/faces-in-the-wall.jpg');
+    background-image: url('images/symbols-smaller.jpg');
 }
+
+#footer {
+    height: 100px;
+    background-image: url('images/faces-stolb.jpg');
+}
+
+#header h1 {
+    color: #111111;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: white;
+    
+}
+ #header p {
+     color: #111111;
+    font-weight: bold;
+ }
+
+#addNewHouseButton {
+   margin-left: 10px;
+    float: left;
+}
+

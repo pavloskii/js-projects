@@ -97,40 +97,40 @@ let westeros = {
 }
 
 //----------------------------------------------------------------------------------
-let people1 = [];
-for (let i = 0; i <= 1000; i++) {
-    people1.push(new Person("Person " + (i + 1)));
-}
-let john = new Lord('John Snow', 1000);
-let rob = new Lord('Rob Stark', 5000);
-people1.push(john);
-people1.push(rob);
-let stark = new House("Stark", "wolf", rob, people1);
+// let people1 = [];
+// for (let i = 0; i <= 1000; i++) {
+//     people1.push(new Person("Person " + (i + 1)));
+// }
+// let john = new Lord('John Snow', 1000);
+// let rob = new Lord('Rob Stark', 5000);
+// people1.push(john);
+// people1.push(rob);
+// let stark = new House("Stark", "wolf", rob, people1);
 
-let people2 = [];
-for (let i = 0; i <= 1000; i++) {
-    people2.push(new Person("Person " + (i + 1)));
-}
-let tywin = new Lord("Tywin Lannister", 30000);
-let jamie = new Lord("Jamie Lannister", 1000);
-let joffrey = new Lord("Joffrey", 300);
-people2.push(tywin, jamie, joffrey);
-//assign king
-westeros.crown([john, rob, tywin, jamie, joffrey]);
-let lannister = new House("Lannister", "lion", tywin, people2);
+// let people2 = [];
+// for (let i = 0; i <= 1000; i++) {
+//     people2.push(new Person("Person " + (i + 1)));
+// }
+// let tywin = new Lord("Tywin Lannister", 30000);
+// let jamie = new Lord("Jamie Lannister", 1000);
+// let joffrey = new Lord("Joffrey", 300);
+// people2.push(tywin, jamie, joffrey);
+// //assign king
+// westeros.crown([john, rob, tywin, jamie, joffrey]);
+// let lannister = new House("Lannister", "lion", tywin, people2);
 
-console.log(stark, lannister);
+// console.log(stark, lannister);
 
-while (true) {
-    if (!stark.attack(lannister)) {
-        console.log("Stark defeated");
-        break;
-    }
-    if (!lannister.attack(stark)) {
-        console.log("Lanister defeated");
-        break;
-    }
-}
+// while (true) {
+//     if (!stark.attack(lannister)) {
+//         console.log("Stark defeated");
+//         break;
+//     }
+//     if (!lannister.attack(stark)) {
+//         console.log("Lanister defeated");
+//         break;
+//     }
+// }
 
 
 //funkcija edna za let people1 so parametri: eden da e array so ime drug da e kolku dusi da imat toest array.legth
@@ -138,3 +138,11 @@ while (true) {
 //da se pisit combaat text vo nekoj gole imput
 //da mojs da stajs sliki za kukjite
 //da se napravi FOR kaj so namesto array.length ke se stavi brojka koja ke moze da se vnesi vo input .. i za tolku pati da se izvrsi funkcijata attack.
+
+$("#addNewHouseButton").click(function () {  
+    $("#main").append(`<div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor..</p>
+      <p>Ut enim ad..</p>
+    </div>`)
+})
