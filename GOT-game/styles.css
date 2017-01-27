@@ -1,9 +1,12 @@
 body {
     background-color: #dbdbdb;
+    background-image: url('images/the-throne.jpg');
+    background-position: 0px 180px; 
 }
 
 #header {
-    background-image: url('images/symbols-smaller.jpg');
+    background-image: url('images/gothead2.1.jpg');
+    margin-bottom: 0px;
 }
 
 #footer {
@@ -11,6 +14,19 @@ body {
     background-image: url('images/symbols.jpg');
 }
 
+#houseInputs label {
+    color:whitesmoke;
+}
+
+#lordBackground, #houseInputs{
+    padding: 10px;
+    background-color: black;
+}
+
+#saveHouse {
+    color: white;
+    background-color: #4d0000;
+}
 /*#header h1 {
     color: #111111;
     font-weight: bold;
@@ -22,9 +38,4 @@ body {
      color: #111111;
     font-weight: bold;
  }*/
-
-#addNewHouseButton {
-   margin-left: 10px;
-    float: left;
-}
 

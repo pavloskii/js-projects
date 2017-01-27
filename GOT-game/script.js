@@ -139,10 +139,37 @@ let westeros = {
 //da mojs da stajs sliki za kukjite
 //da se napravi FOR kaj so namesto array.length ke se stavi brojka koja ke moze da se vnesi vo input .. i za tolku pati da se izvrsi funkcijata attack.
 
-$("#addNewHouseButton").click(function () {  
-    $("#main").append(`<div class="col-sm-4">
-      <h3>Column 1</h3>
-      <p>Lorem ipsum dolor..</p>
-      <p>Ut enim ad..</p>
-    </div>`)
+//-----------add new house button ------------
+$("#addNewHouse").click(function () {
+  $('#houseInputs').removeAttr("hidden");
 })
+// ----------add more lords button ------------
+$("#addMoreLords").click(function () {
+  $('#lordDiv').append(`<div class="form-group newLordInput">
+                <label for="houseLords" class="newLordInput">Lord's Name:</label>
+                <input type="text" class="form-control newLordInput" placeholder="enter the name of the lord">
+            </div>`);
+});
+
+// ----------close the add house inputs ------------
+$("#closeButton").click(function () {
+  $('#houseInputs').attr("hidden", true);
+  $(".newLordInput").remove();
+});
+
+// ----------Save house button ------------
+$("#saveHouse").click(function () {
+  $('#houseInputs').attr("hidden", true);
+  $(".newLordInput").remove();
+});
+
+// $("#addMoreLords").click(function () {
+//     $(this).append(`<div class="form-group">
+//     <label for="houseLords">Lord's Name:</label>
+//     <input type="text" class="form-control" id="houseLords" placeholder="enter the name of the lord">
+// </div>`)
+// });
+
+    // ova ke trebit da se desavat na save kopce ko ke se pritisnit
+//     $("#houseMenu").append(`<li>${$("#houseName").val()}</li>`); 
+// })

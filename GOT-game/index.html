@@ -10,24 +10,61 @@
 </head>
 
 <body>
-<!--Header-ot......................................................-->
+    <!--Header-ot......................................................-->
     <div class="jumbotron text-center" id="header">
-        <button id="addNewHouseButton">Add New House</button>
         <br>
         <br>
-        <br>
-        
     </div>
-<!--sredisniot del...................................................-->
+    <!--Navigacija i dodavanje na kukji-->
+    <nav class="navbar navbar-inverse">
+        <ul class="nav navbar-nav" id="houseMenu">
+            <li class="active"><a id="addNewHouse" type="button">Add New House</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" hidden id="houseInputs">
+            <div class="form-group">
+                <label for="houseName">Name:</label>
+                <input type="text" class="form-control" id="houseName" placeholder="House name">
+            </div>
+
+            <div class="form-group">
+                <label for="housePop">Population:</label>
+                <input type="number" class="form-control" id="housePop" placeholder="Number of people">
+            </div>
+
+            <div class="form-group">
+                <label for="symbol">Symbol:</label>
+                <input type="text" class="form-control" id="symbol" placeholder="Please enter a image source here">
+            </div>
+            <div id="lordBackground">
+                <div class="form-group" id="lordDiv">
+                    <label for="houseLords">Lord's Name:</label>
+                    <input type="text" class="form-control" id="houseLords" placeholder="enter the name of the lord">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-default" value="Add More Lords" id="addMoreLords">
+                </div>
+            </div>
+            <div class="form-group col-sm-3 col-md-offset-7">
+                <input type="button" class="btn btn-default" value="Save House" id="saveHouse">
+            </div>
+            <div class="form-group col-sm-1">
+                <input type="button" class="btn btn-default" value="X" id="closeButton">
+            </div>
+
+        </div>
+
+    </nav>
+    <!--sredisniot del...................................................-->
     <div class="container" id="main">
 
     </div>
-<!--footerot.........................................................-->
+    <!--footerot.........................................................-->
     <div class="navbar-fixed-bottom" id="footer">
         <p>Seavus Academy 5</p>
     </div>
 
-<!--skripti...........................................................-->
+    <!--skripti...........................................................-->
     <script src="jquery.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
     <script src="script.js"></script>
