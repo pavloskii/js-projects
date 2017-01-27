@@ -8,12 +8,18 @@ class House {
 
         this.calculateHealthPower();
     }
+    //funkcija za vnesuvanje populacija / prvicna populacija na kukjite
+    addPeople(numberOfPeople) {
+        for (let i = 0; i <= numberOfPeople; i++) {
+            this.people.push(new Person("Person " + (i + 1)));
+        }
+    }
 
     calculateHealthPower() {
         this.attackPower = 0;
         this.health = 0;
 
-        this.people.forEach(function(person, i){
+        this.people.forEach(function (person, i) {
             this.attackPower += person.attackPower;
             this.health += person.health;
         }, this);
@@ -37,10 +43,10 @@ class House {
     }
 
     recalulatePower(attackPower) {
-        let noPeople = attackPower/100;
+        let noPeople = attackPower / 100;
         console.log("noPeople", noPeople);
-        if(noPeople < this.people.length) {
-            this.people.splice(0,noPeople);
+        if (noPeople < this.people.length) {
+            this.people.splice(0, noPeople);
             this.calculateHealthPower();
         } else {
             console.log(`${this.name} is ruined`);
@@ -49,7 +55,7 @@ class House {
     }
 
     attack(house) {
-        if(!this.isRuined() && this.canAttack()) {
+        if (!this.isRuined() && this.canAttack()) {
             house.recalulatePower(this.attackPower);
             return true;
         } else {
@@ -57,7 +63,7 @@ class House {
         }
     }
 }
-
+//Person class------------------------------------------------------------------------------------------------------------------------
 class Person {
     constructor(name) {
         this.name = name;
@@ -65,9 +71,9 @@ class Person {
         this.health = 100;
     }
 }
-
-class Lord extends Person{
-    constructor(name, wealth){
+//Lord class------------------------------------------------------------------------------------------------------------------------
+class Lord extends Person {
+    constructor(name, wealth) {
         super(name);
         this.wealth = wealth;
         this.attackPower += 10;
@@ -77,22 +83,23 @@ class Lord extends Person{
     makeKing() {
         this.isKing = true;
         this.attackPower += 3;
-    } 
+    }
 }
-
+//randomm int function------------------------------------------------------------
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+//funkcija za krunisuvanje------------------------------------------------------------
 let westeros = {
-    crown: function(lords) {
-        lords[getRandomInt(0,lords.length-1)].makeKing();
+    crown: function (lords) {
+        lords[getRandomInt(0, lords.length - 1)].makeKing();
     }
 }
 
+//----------------------------------------------------------------------------------
 let people1 = [];
-for(let i = 0; i <= 1000; i++) {
-    people1.push(new Person("Person " + (i+1)));
+for (let i = 0; i <= 1000; i++) {
+    people1.push(new Person("Person " + (i + 1)));
 }
 let john = new Lord('John Snow', 1000);
 let rob = new Lord('Rob Stark', 5000);
@@ -101,8 +108,8 @@ people1.push(rob);
 let stark = new House("Stark", "wolf", rob, people1);
 
 let people2 = [];
-for(let i = 0; i <= 1000; i++) {
-    people2.push(new Person("Person " + (i+1)));
+for (let i = 0; i <= 1000; i++) {
+    people2.push(new Person("Person " + (i + 1)));
 }
 let tywin = new Lord("Tywin Lannister", 30000);
 let jamie = new Lord("Jamie Lannister", 1000);
@@ -114,12 +121,12 @@ let lannister = new House("Lannister", "lion", tywin, people2);
 
 console.log(stark, lannister);
 
-while(true) {
-    if(!stark.attack(lannister)) {
+while (true) {
+    if (!stark.attack(lannister)) {
         console.log("Stark defeated");
         break;
     }
-    if(!lannister.attack(stark)) {
+    if (!lannister.attack(stark)) {
         console.log("Lanister defeated");
         break;
     }
@@ -130,3 +137,4 @@ while(true) {
 //zmej da mojt da vlezit vo bitkava i da otepat lugje
 //da se pisit combaat text vo nekoj gole imput
 //da mojs da stajs sliki za kukjite
+//da se napravi FOR kaj so namesto array.length ke se stavi brojka koja ke moze da se vnesi vo input .. i za tolku pati da se izvrsi funkcijata attack.

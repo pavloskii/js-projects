@@ -39,7 +39,7 @@
       lastName: $firstName.val(),
       phone: $phone.val()
     };
-    if($firstName.val()== "" || $firstName.val() == "" || $phone.val()=="") {
+    if($firstName.val()== "" || $lastName.val() == "" || $phone.val()=="") {
         alert("Please insert value in all inputs");
     }else {
     people.push(person);
