@@ -73,9 +73,8 @@ class Person {
 }
 //Lord class------------------------------------------------------------------------------------------------------------------------
 class Lord extends Person {
-    constructor(name, wealth) {
+    constructor(name) {
         super(name);
-        this.wealth = wealth;
         this.attackPower += 10;
         this.isKing = false;
     }
@@ -139,36 +138,58 @@ let westeros = {
 //da mojs da stajs sliki za kukjite
 //da se napravi FOR kaj so namesto array.length ke se stavi brojka koja ke moze da se vnesi vo input .. i za tolku pati da se izvrsi funkcijata attack.
 
+let allLords = [];
 //-----------add new house button ------------
 $("#addNewHouse").click(function () {
-  $('#houseInputs').removeAttr("hidden");
+    $('#houseInputs').removeAttr("hidden");
 })
 // ----------add more lords button ------------
 $("#addMoreLords").click(function () {
-  $('#lordDiv').append(`<div class="form-group newLordInput">
-                <label for="houseLords" class="newLordInput">Lord's Name:</label>
-                <input type="text" class="form-control newLordInput" placeholder="enter the name of the lord">
-            </div>`);
+    if ($('#houseLords').val() == '') {
+        alert("Please enter first Lord's name first");
+    }
+    else {
+        let houseLords = [];
+        let lordName = $('#houseLords').val();
+        let lord = new Lord(lordName);
+        allLords.push(lord);
+        houseLords.push(lord);
+        console.log(allLords)
+        console.log(lord);
+        $('#lordDiv').append(`<p class="">${lordName}</p>`);
+        $('#houseLords').val('');
+    //     $('#lordDiv').append(`<div class="form-group newLordInput">
+    //             <label for="houseLords" class="newLordInput">Lord's Name:</label>
+    //             <input type="text" class="form-control newLordInput lords" placeholder="enter the name of the lord">
+    // </div>`);
+    }
 });
 
 // ----------close the add house inputs ------------
 $("#closeButton").click(function () {
-  $('#houseInputs').attr("hidden", true);
-  $(".newLordInput").remove();
+    $('#houseInputs').attr("hidden", true);
+    $(".newLordInput").remove();
 });
 
 // ----------Save house button ------------
 $("#saveHouse").click(function () {
-  $('#houseInputs').attr("hidden", true);
-  $(".newLordInput").remove();
+    let houseName = $("#houseName").val();
+    let housePopulation = $("#housePop").val();
+    let symbol = $("#symbol").val();
+    let lords = $(".lords").val();
+
+    let house = new House(houseName, )
+    console.log(houseName + housePopulation + symbol + lords);
+
+    // if(houseName == '' || housePopulation == '' || symbol == '' || )
+    $("#houseName").val('');
+    $("#housePop").val('');
+    $("#symbol").val('');
+    $(".lords").val('');
+    $('#houseInputs').attr("hidden", true);
+    $(".newLordInput").remove();
 });
 
-// $("#addMoreLords").click(function () {
-//     $(this).append(`<div class="form-group">
-//     <label for="houseLords">Lord's Name:</label>
-//     <input type="text" class="form-control" id="houseLords" placeholder="enter the name of the lord">
-// </div>`)
-// });
 
     // ova ke trebit da se desavat na save kopce ko ke se pritisnit
 //     $("#houseMenu").append(`<li>${$("#houseName").val()}</li>`); 

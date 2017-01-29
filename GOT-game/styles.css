@@ -10,12 +10,17 @@ body {
 }
 
 #footer {
-    
+    text-align: center;
+    color: lightslategray;
     background-image: url('images/symbols.jpg');
 }
 
 #houseInputs label {
     color:whitesmoke;
+}
+
+#lordBackground p {
+    color: floralwhite;
 }
 
 #lordBackground, #houseInputs{
