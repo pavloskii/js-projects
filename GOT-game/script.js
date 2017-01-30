@@ -48,15 +48,24 @@ class House {
         }
     }
 
-    attack(attacker, attacked) {
+    // attack(attacker, attacked) {
+    //     if (!attacker.isRuined() && attacker.canAttack()) {
+    //         attacked.recalculatePower(attacker.attackPower);
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+}
+ function attack(attacker, attacked) {
         if (!attacker.isRuined() && attacker.canAttack()) {
             attacked.recalculatePower(attacker.attackPower);
+            
             return true;
         } else {
             return false;
         }
     }
-}
 //Person class------------------------------------------------------------------------------------------------------------------------
 class Person {
     constructor(name) {
@@ -195,10 +204,17 @@ $("#saveHouse").click(function () {
     let population = addPeople(housePopulation);
     let lordAndPop = population.concat(lords);
 
+    //za verifikacija na lordovi polinjata... vekje vneseno
+    // let verifyLords = $(".lords").each(function () {
+    //     if ($('.lords').val() == '') {
+    //         return false;
+    //     }
+    // })
     //kreiranje na kukja-------------------------------------------------------------------
-    if (houseName == '' || housePopulation == '' || symbol == '' || lords == '' || population == '' || ($('.lords').val()) == '') {
+    if (houseName == '' || housePopulation == '' || symbol == '' || lords == '' || population == '' || $('.lords').val() == '') {
         alert("Please fill all the empty inputs");
     }
+
     else {
         let house = new House(houseName, symbol, lords, lordAndPop);
         allHouses.push(house);
@@ -230,15 +246,27 @@ $("#saveHouse").click(function () {
 </div>`);
 
         //----kopce za napad na druga kukja----------------------------------------------------------------
-        // $(`#attackButton${house.name}`).click(function () {
-        //     let attackInput = `${house.name}Attack`;
-        //    let attackedHouseIndex = allHouses.forEach(function (element, i) { 
-        //         if(element.name == attackInput) {
-        //             return i;
-        //         }
-        //      })
-        //     house.attack(allHouses[attackedHouseIndex]);
-        // });
+        $(`#attackButton${house.name}`).click(function () {
+            let attackedHouseIndex;
+            allHouses.forEach(function (element, i) { 
+                if(element.name == $(`#${house.name}Attack`).val()) {
+                    attackedHouseIndex = i;
+                }
+             })
+             let attackerHouseIndex; 
+             allHouses.forEach(function (element, i) { 
+                if(element.name == house.name) {
+                    attackerHouseIndex = i;
+                }
+             })
+             console.log(attackedHouseIndex);
+             console.log(house.name);
+             console.log($(`#${house.name}Attack`).val());
+              console.log(attackerHouseIndex);
+              console.log(allHouses);
+
+            attack(allHouses[attackerHouseIndex], allHouses[attackedHouseIndex]);
+        });
 
 
 
@@ -267,4 +295,6 @@ $("#saveHouse").click(function () {
         console.log(house);
     }
 });
+
+
 
