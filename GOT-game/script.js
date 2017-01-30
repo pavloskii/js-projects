@@ -36,7 +36,7 @@ class House {
         return this.attackPower > 0;
     }
 
-    recalulatePower(attackPower) {
+    recalculatePower(attackPower) {
         let noPeople = attackPower / 100;
         console.log("noPeople", noPeople);
         if (noPeople < this.people.length) {
@@ -48,9 +48,9 @@ class House {
         }
     }
 
-    attack(house) {
-        if (!this.isRuined() && this.canAttack()) {
-            house.recalulatePower(this.attackPower);
+    attack(attacker, attacked) {
+        if (!attacker.isRuined() && attacker.canAttack()) {
+            attacked.recalculatePower(attacker.attackPower);
             return true;
         } else {
             return false;
@@ -162,6 +162,7 @@ function listLords(lords) {
 }
 //-----------------------------------
 let allLords = [];
+let allHouses = [];
 //-----------add new house button ------------
 $("#addNewHouse").click(function () {
     $('#houseInputs').removeAttr("hidden");
@@ -194,12 +195,13 @@ $("#saveHouse").click(function () {
     let population = addPeople(housePopulation);
     let lordAndPop = population.concat(lords);
 
+    //kreiranje na kukja-------------------------------------------------------------------
     if (houseName == '' || housePopulation == '' || symbol == '' || lords == '' || population == '' || ($('.lords').val()) == '') {
         alert("Please fill all the empty inputs");
     }
     else {
         let house = new House(houseName, symbol, lords, lordAndPop);
-
+        allHouses.push(house);
         $("#houseMenu").append(`<li><input type="button" class="btn btn-default btn-lg" value="${house.name}" id="button${houseName}"</li>`);
         $("#main").append(`
         <div class="row houseRow" id="row${houseName}" hidden>
@@ -214,26 +216,46 @@ $("#saveHouse").click(function () {
     <div class="col-sm-4">
         <h3></h3>
         <div class="form-group">
-            <input type="text" class="btn btn-default" placeholder="enter a house name to attack">
-            <input type="button" class="btn btn-default" value="Attack">
+            <input type="text" class="btn btn-default" id="${house.name}Attack" placeholder="enter a house name to attack">
+            <input type="button" class="btn btn-default" id="attackButton${house.name}" value="Attack">
         </div>
         <div class="form-group">
             <label for="combatText">Combat Text:</label><br>
-            <textarea id="combatText"></textarea>
+            <textarea id="combatTextfor${house.name}" readonly></textarea>
         </div>
         <div class="form-group">
-            <input type="button" class="btn btn-default" value="Clear">
+            <input type="button" class="btn btn-default" id="clearCombatTextFor${house.name}" value="Clear">
         </div>
     </div>
 </div>`);
+
+        //----kopce za napad na druga kukja----------------------------------------------------------------
+        // $(`#attackButton${house.name}`).click(function () {
+        //     let attackInput = `${house.name}Attack`;
+        //    let attackedHouseIndex = allHouses.forEach(function (element, i) { 
+        //         if(element.name == attackInput) {
+        //             return i;
+        //         }
+        //      })
+        //     house.attack(allHouses[attackedHouseIndex]);
+        // });
+
+
+
+        //---kopce za citenje na combat text---------------------------------------------------------------
+        $(`#clearCombatTextFor${house.name}`).click(function () {
+            $(`#combatTextfor${house.name}`).val('');
+        });
+
+        //---unikatno kopce za trganje i postavuvanje na attributot hidden od rowot za unikatna kukja--
         $(`#button${houseName}`).click(function () {
-            if($(`#row${houseName}`).css('display') == 'none'){
-                 $(`#row${houseName}`).removeAttr("hidden");
-            }else {
+            if ($(`#row${houseName}`).css('display') == 'none') {
+                $(`#row${houseName}`).removeAttr("hidden");
+            } else {
                 $(`#row${houseName}`).attr("hidden", true);
             }
         });
-
+        //---brisenje na polinata za dodavanje novi kukji
         $("#houseName").val('');
         $("#housePop").val('');
         $("#symbol").val('');

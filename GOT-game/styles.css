@@ -46,6 +46,7 @@ body {
 }
 
 textarea    {
+    color: black;
     height: 270px;
     width: 270px;
 }
