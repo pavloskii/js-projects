@@ -2,6 +2,7 @@ body {
     background-color: #dbdbdb;
     background-image: url('images/the-throne.jpg');
     background-position: 0px 180px; 
+    color: antiquewhite;
 }
 
 #header {
@@ -23,7 +24,13 @@ body {
     color: floralwhite;
 }
 
-#lordBackground, #houseInputs{
+#lordBackground {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #4c4c4c;
+}
+
+#houseInputs {
     padding: 10px;
     background-color: black;
 }
@@ -32,15 +39,18 @@ body {
     color: white;
     background-color: #4d0000;
 }
-/*#header h1 {
-    color: #111111;
-    font-weight: bold;
-    -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: white;
-    
-}
- #header p {
-     color: #111111;
-    font-weight: bold;
- }*/
 
+.houseImage {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+textarea    {
+    height: 270px;
+    width: 270px;
+}
+
+div.houseRow {
+    background-color:rgba(38, 37, 37, 0.7);
+    margin-bottom: 20px;
+}

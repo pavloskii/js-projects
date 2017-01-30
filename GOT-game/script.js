@@ -1,18 +1,12 @@
 class House {
-    constructor(name, symbol, lord, people) {
+    constructor(name, symbol, lords, people) {
         this.name = name;
         this.symbol = symbol;
-        this.lord = lord;
+        this.lords = lords;
         this.people = people;
         this.noOfPeople = this.people.length;
 
         this.calculateHealthPower();
-    }
-    //funkcija za vnesuvanje populacija / prvicna populacija na kukjite
-    addPeople(numberOfPeople) {
-        for (let i = 0; i <= numberOfPeople; i++) {
-            this.people.push(new Person("Person " + (i + 1)));
-        }
     }
 
     calculateHealthPower() {
@@ -137,7 +131,36 @@ let westeros = {
 //da se pisit combaat text vo nekoj gole imput
 //da mojs da stajs sliki za kukjite
 //da se napravi FOR kaj so namesto array.length ke se stavi brojka koja ke moze da se vnesi vo input .. i za tolku pati da se izvrsi funkcijata attack.
+//-funkcija za vnesuvanje lordovi----------------------------------
+function getLords(selector) {
+    let houseLords = [];
+    $(selector).each(function () {
+        let lord = $(this).val();
+        let lordObj = new Lord(lord);
+        allLords.push(lordObj);
+        houseLords.push(lordObj);
+    });
+    return houseLords;
+}
 
+//funkcija za vnesuvanje populacija / prvicna populacija na kukjite
+function addPeople(numberOfPeople) {
+    let people = [];
+    for (let i = 1; i <= numberOfPeople; i++) {
+        people.push(new Person("Person " + i));
+    }
+    return people;
+}
+//funkcija za listanje na lordovite od lista----za pecatenje
+function listLords(lords) {
+    let lordsList = '';
+    for (i = 0; i < lords.length; i++) {
+        let lordsName = lords[i].name;
+        lordsList += lordsName + ", ";
+    }
+    return lordsList;
+}
+//-----------------------------------
 let allLords = [];
 //-----------add new house button ------------
 $("#addNewHouse").click(function () {
@@ -145,23 +168,14 @@ $("#addNewHouse").click(function () {
 })
 // ----------add more lords button ------------
 $("#addMoreLords").click(function () {
-    if ($('#houseLords').val() == '') {
+    if ($('.lords').val() == '') {
         alert("Please enter first Lord's name first");
     }
     else {
-        let houseLords = [];
-        let lordName = $('#houseLords').val();
-        let lord = new Lord(lordName);
-        allLords.push(lord);
-        houseLords.push(lord);
-        console.log(allLords)
-        console.log(lord);
-        $('#lordDiv').append(`<p class="">${lordName}</p>`);
-        $('#houseLords').val('');
-    //     $('#lordDiv').append(`<div class="form-group newLordInput">
-    //             <label for="houseLords" class="newLordInput">Lord's Name:</label>
-    //             <input type="text" class="form-control newLordInput lords" placeholder="enter the name of the lord">
-    // </div>`);
+        $('#lordDiv').append(`<div class="form-group newLordInput">
+                    <label for="houseLords" class="newLordInput">Lord's Name:</label>
+                    <input type="text" class="form-control newLordInput lords" placeholder="name of the lord">
+        </div>`);
     }
 });
 
@@ -170,27 +184,65 @@ $("#closeButton").click(function () {
     $('#houseInputs').attr("hidden", true);
     $(".newLordInput").remove();
 });
-
 // ----------Save house button ------------
 $("#saveHouse").click(function () {
+
     let houseName = $("#houseName").val();
     let housePopulation = $("#housePop").val();
     let symbol = $("#symbol").val();
-    let lords = $(".lords").val();
+    let lords = getLords(".lords");
+    let population = addPeople(housePopulation);
+    let lordAndPop = population.concat(lords);
 
-    let house = new House(houseName, )
-    console.log(houseName + housePopulation + symbol + lords);
+    if (houseName == '' || housePopulation == '' || symbol == '' || lords == '' || population == '' || ($('.lords').val()) == '') {
+        alert("Please fill all the empty inputs");
+    }
+    else {
+        let house = new House(houseName, symbol, lords, lordAndPop);
 
-    // if(houseName == '' || housePopulation == '' || symbol == '' || )
-    $("#houseName").val('');
-    $("#housePop").val('');
-    $("#symbol").val('');
-    $(".lords").val('');
-    $('#houseInputs').attr("hidden", true);
-    $(".newLordInput").remove();
+        $("#houseMenu").append(`<li><input type="button" class="btn btn-default btn-lg" value="${house.name}" id="button${houseName}"</li>`);
+        $("#main").append(`
+        <div class="row houseRow" id="row${houseName}" hidden>
+    <div class="col-sm-4">
+        <h3><b>House:</b> ${houseName}</h3>
+        <img src="${symbol}" class="img-thumbnail houseImage">
+        <p><b>Lords:</b> ${listLords(lords)}</p>
+        <p><b>Population:</b> ${house.noOfPeople}</p>
+        <p><b>Attack Power:</b> ${house.attackPower}</p>
+        <p><b>Health:</b> ${house.health}</p>
+    </div>
+    <div class="col-sm-4">
+        <h3></h3>
+        <div class="form-group">
+            <input type="text" class="btn btn-default" placeholder="enter a house name to attack">
+            <input type="button" class="btn btn-default" value="Attack">
+        </div>
+        <div class="form-group">
+            <label for="combatText">Combat Text:</label><br>
+            <textarea id="combatText"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-default" value="Clear">
+        </div>
+    </div>
+</div>`);
+        $(`#button${houseName}`).click(function () {
+            if($(`#row${houseName}`).css('display') == 'none'){
+                 $(`#row${houseName}`).removeAttr("hidden");
+            }else {
+                $(`#row${houseName}`).attr("hidden", true);
+            }
+        });
+
+        $("#houseName").val('');
+        $("#housePop").val('');
+        $("#symbol").val('');
+        $(".lords").each(function () {
+            $(".lords").val('');
+        });
+        $('#houseInputs').attr("hidden", true);
+        $(".newLordInput").remove();
+        console.log(house);
+    }
 });
 
-
-    // ova ke trebit da se desavat na save kopce ko ke se pritisnit
-//     $("#houseMenu").append(`<li>${$("#houseName").val()}</li>`); 
-// })
