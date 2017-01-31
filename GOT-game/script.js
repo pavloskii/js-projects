@@ -57,15 +57,26 @@ class House {
     //     }
     // }
 }
+//funkcija za dodavanje na text vo textarea------------------
+function addText(textarea, text) {
+    $(textarea).val($(textarea).val()+ text +"\n"); 
+}
+//funkcija za napad-----------------
  function attack(attacker, attacked) {
+     if (allHouses.includes(attacked)) {
         if (!attacker.isRuined() && attacker.canAttack()) {
             attacked.recalculatePower(attacker.attackPower);
-            
+
+            addText(`#combatTextfor${attacker.name}`, `${attacker.name} has gathered the troops and started and attack on ${attacked.name}. \nThe fight is over, we managed to kill ${attacked.attackPower / 100} ${attacked.name}s.`);
+            addText(`#combatTextfor${attacked.name}`, `We were attacked by House ${attacker.name}. \nAfter the attack we got ${attacked.attackPower} attack power left, and ${attacked.health} health left. \nWe suffered ${attacked.attackPower / 100} deaths. RIP :(`);
             return true;
         } else {
             return false;
         }
+    }else {
+        alert("Please enter a valid house name (name is case sensitive)");
     }
+ } 
 //Person class------------------------------------------------------------------------------------------------------------------------
 class Person {
     constructor(name) {
@@ -272,7 +283,7 @@ $("#saveHouse").click(function () {
 
         //---kopce za citenje na combat text---------------------------------------------------------------
         $(`#clearCombatTextFor${house.name}`).click(function () {
-            $(`#combatTextfor${house.name}`).val('');
+            $(`#combatTextfor${house.name}`).val('');   
         });
 
         //---unikatno kopce za trganje i postavuvanje na attributot hidden od rowot za unikatna kukja--
