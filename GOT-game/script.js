@@ -67,8 +67,8 @@ function addText(textarea, text) {
         if (!attacker.isRuined() && attacker.canAttack()) {
             attacked.recalculatePower(attacker.attackPower);
 
-            addText(`#combatTextfor${attacker.name}`, `${attacker.name} has gathered the troops and started and attack on ${attacked.name}. \nThe fight is over, we managed to kill ${attacked.attackPower / 100} ${attacked.name}s.`);
-            addText(`#combatTextfor${attacked.name}`, `We were attacked by House ${attacker.name}. \nAfter the attack we got ${attacked.attackPower} attack power left, and ${attacked.health} health left. \nWe suffered ${attacked.attackPower / 100} deaths. RIP :(`);
+            addText(`#combatTextfor${attacker.name}`, `${attacker.name} has gathered the troops and started and attack on ${attacked.name}. \nThe fight is over, we managed to kill ${parseInt(attacked.attackPower / 100)} ${attacked.name}s.`);
+            addText(`#combatTextfor${attacked.name}`, `We were attacked by House ${attacker.name}. \nAfter the attack we got ${attacked.attackPower} attack power left, and ${attacked.health} health left. \nWe suffered ${parseInt(attacked.attackPower / 100)} deaths.`);
             return true;
         } else {
             return false;
