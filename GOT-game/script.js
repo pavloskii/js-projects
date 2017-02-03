@@ -65,6 +65,7 @@ function addText(textarea, text) {
  function attack(attacker, attacked) {
      if (allHouses.includes(attacked)) {
         if (!attacker.isRuined() && attacker.canAttack()) {
+            //ovde trebit da se stavit ako nesto se desit pred napadot so random od 0-10 i da se naprajt recalculate power i za napagjacot i posle da se napadnit
             attacked.recalculatePower(attacker.attackPower);
 
             addText(`#combatTextfor${attacker.name}`, `${attacker.name} has gathered the troops and started and attack on ${attacked.name}. \nThe fight is over, we managed to kill ${parseInt(attacked.attackPower / 100)} ${attacked.name}s.`);
