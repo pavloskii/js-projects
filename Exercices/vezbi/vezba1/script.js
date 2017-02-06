@@ -34,9 +34,21 @@ $('#saveButton').click(function () {
             <td> <input type="button" class="btn btn-danger" id='delete${empIndex}' value="X" "</td>
     </tr>`)
 
+//edit button------------------------------------------------------------------------------------------------------------------------------
     $(`#edit${empIndex}`).click(function () {  
         $(`#save${empIndex}, #delete${empIndex}`).css('display', 'block');
         $(`#name${empIndex}, #last${empIndex}, #email${empIndex}, #password${empIndex}`).removeAttr('readonly');
+
+    });
+//save after edit button------------------------------------------------------------------------------------------------------------------------------
+     $(`#save${empIndex}`).click(function () {  
+        $(`#save${empIndex}, #delete${empIndex}`).css('display', 'none');
+        $(`#name${empIndex}, #last${empIndex}, #email${empIndex}, #password${empIndex}`).attr('readonly', 'readonly');
+
+    });
+//delete button------------------------------------------------------------------------------------------------------------------------------
+    $(`#delete${empIndex}`).click(function () {  
+        $(`#row${empIndex}`).remove();  
 
     });
 
@@ -46,7 +58,6 @@ $('#saveButton').click(function () {
     $('#password').val('');
 });
 
-//----------edit ---------------------------------------------
 
 
 
