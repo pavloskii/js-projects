@@ -16,6 +16,9 @@ $('#saveButton').click(function () {
     let email = $('#email').val();
     let password = $('#password').val();
 
+if(firstName == '' || lastName == '' || email == '' || password == ''){
+
+
     let employee = new Employee(firstName, lastName, email, password);
     employees.push(employee);
 
@@ -64,6 +67,10 @@ $('#saveButton').click(function () {
     $('#lastName').val('');
     $('#email').val('');
     $('#password').val('');
+}
+else {
+    alert()
+}
 });
 
 
