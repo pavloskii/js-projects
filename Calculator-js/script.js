@@ -1,24 +1,75 @@
-// add, 
-// subtract, 
-// multiply
-// and divide.
+//-------main function------------------------------
+function doOperation(operationID) {
+    $(operationID).click(function (e) {
+        if ($('#answer').val() == '') {
+            return false;
+            $('#equals').attr('onclick', '');
+        }
+        else if ($('#operation').attr('class') == 'activeAnswer') {
+            $('#operation').val($('#operation').val() + $(operationID).val());
+            $('#answer').val('');
+            $('#equals').attr('onclick', '');
+        }
+        else {
+            $('#operation').val($('#operation').val() + $('#answer').val() + $(operationID).val());
+            $('#answer').val('');
+            $('#equals').attr('onclick', '');
+        }
+    });
+}
+//--------------------------------------------------
+$(document).ready(function (e) {
+    $("button").css({ width: "50px", height: "50px" });
 
-//  Hmm, what about negative numbers - so we also need to be able to change the sign of a number. What else?
-//  Well, we're going to allow rather big numbers, so it's a good idea to have a button that easily allows 
-//  us to enter an exponent (the number times 10something). We need a decimal point. And we need to be able to
-//   clear the display (a CLEAR button), and to clear everything (ALL CLEAR). Let's list out requirements up to now:
+    $('#1,#2,#3,#4,#5,#6,#7,#8,#9,#0').click(function () {
+        let v = $(this).val();
+        $('#answer').val($('#answer').val() + v);
+    });
+    $('#C').click(function () {
+        $('#answer').val('');
+        $('#operation').val('');
+        $('#operation').removeClass('activeAnswer');
+        $('#equals').attr('onclick', '');
+    });
+    //all operations------+-/*------------------------------
+    doOperation("#subtract");
+    doOperation("#divide");
+    doOperation("#plus");
+    doOperation("#multiply");
+    //decimal-----------------------------------------------
+    $("#decimal").click(function (e) {
+        let decimal = $("#decimal").val();
+        if ($('#answer').val() == '' || $('#answer').val().indexOf(decimal) > -1) {
+            return false;
+        } else {
+            $('#answer').val($('#answer').val() + decimal);
+        }
+    });
+    //plus/minus--------------------------------------------
+    $("#plusMinus").click(function (e) {
+        if ($('#answer').val() == '') {
+            return false;
+        }
+        // else if ($('#operation').attr('class') == 'activeAnswer') {
+        //    $('#operation').val($('#answer').val() * (-1));
+        // }
+        else {
+            $('#operation').val($('#operation').val() + $('#answer').val() * (-1));
+}
+    });
+//equals------------------------------------------------
+$('#equals').click(function () {
+    if ($('#equals').attr('onclick') != 'return false') {
+        let a = $('#answer').val();
+        let b = $('#operation').val();
+        let c = b.concat(a);
+        $('#answer').val(eval(c));
+        $('#operation').val(eval(c));
+        $('#operation').addClass('activeAnswer');
+        $('#equals').attr('onclick', 'return false');
+    }
+});
+});
 
-// A display area for numbers
-// Buttons for 0,1,2, up to 9
-// A decimal point button
-// A button to change the sign (+/-)
-// Clear and all clear (C, AC buttons)
-// Function buttons (* / + -)
-// A 'calculate' button (The = button)
 
-//o get a negative version of a number in JavaScript you can always you the ~ bitwise operator.
-//For example, if you have a = 1000 and you need to convert it to a negative you could do the following:
-//a = ~a + 1;
-
-$("button").css({width: "50px", height:"50px"});
 
